@@ -8,10 +8,9 @@ router.get('/', (req, res) => {
     res.render('index')
 })
 
-router.get('/listarticles', articlesController.listArticles)
-router.get('/createarticles', articlesController.createArticles)
+router.get('/admin/categories/new', categoriesController.createCategories)
+router.get('/admin/categories', categoriesController.listAllCategories)
+router.post('/categories/save', categoriesController.saveCategory)
 
-router.get('/listcategories', categoriesController.listCategories)
-router.get('/createcategories', categoriesController.createCategories)
 
 module.exports = router
