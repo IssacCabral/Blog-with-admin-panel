@@ -22,5 +22,32 @@ module.exports = {
         Category.findAll().then((categories) => {
             res.render('./admin/categories/index', {categories: categories})
         })
+    },
+    deleteCategory: function(req, res){
+        var id = req.body.id
+        Category.destroy({
+            where: {
+                id: id
+            }
+        }).then(() => {
+            res.redirect("/admin/categories")
+        })
+    },
+    selectCategory: function(req, res){
+        var id = req.params.id
+        Category.findByPk(id).then((category) => {
+            res.render('./admin/categories/edit', {category: category})
+        })
+    },
+    editCategory: function(req, res){
+        var id = req.params.id
+        var title = req.body.title
+
+        Category.findByPk(id).then((category) => {
+            category.title = title
+            category.slug = slugify(title, {lower: true})
+            category.save()
+            res.redirect('/admin/categories')
+        })
     }
 }

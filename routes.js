@@ -10,7 +10,9 @@ router.get('/', (req, res) => {
 
 router.get('/admin/categories/new', categoriesController.createCategories)
 router.get('/admin/categories', categoriesController.listAllCategories)
+router.get('/admin/categories/selectcategory/:id', categoriesController.selectCategory)
+router.post('/admin/categories/edit/:id', categoriesController.editCategory)
 router.post('/categories/save', categoriesController.saveCategory)
-
+router.post('/categories/delete', categoriesController.deleteCategory)
 
 module.exports = router
