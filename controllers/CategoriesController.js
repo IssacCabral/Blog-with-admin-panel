@@ -12,7 +12,7 @@ module.exports = {
                 title: title,
                 slug: slugify(title, {lower: true})
             }).then(() => {
-                res.redirect('/')
+                res.redirect('/admin/categories')
             })
         }else{
             res.redirect('/admin/categories/new')
@@ -35,18 +35,27 @@ module.exports = {
     },
     selectCategory: function(req, res){
         var id = req.params.id
+
         Category.findByPk(id).then((category) => {
             res.render('./admin/categories/edit', {category: category})
         })
     },
-    editCategory: function(req, res){
-        var id = req.params.id
+    updateCategory: function(req, res){
+        var id = req.body.id
         var title = req.body.title
 
-        Category.findByPk(id).then((category) => {
-            category.title = title
-            category.slug = slugify(title, {lower: true})
-            category.save()
+        // Category.findByPk(id).then((category) => {
+        //     category.title = title
+        //     category.slug = slugify(title, {lower: true})
+        //     category.save()
+        //     res.redirect('/admin/categories')
+        // })
+
+        Category.update({title: title, slug: slugify(title, {lower: true}) }, {
+            where: {
+                id: id
+            }
+        }).then(() => {
             res.redirect('/admin/categories')
         })
     }

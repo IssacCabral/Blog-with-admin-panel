@@ -11,8 +11,14 @@ router.get('/', (req, res) => {
 router.get('/admin/categories/new', categoriesController.createCategories)
 router.get('/admin/categories', categoriesController.listAllCategories)
 router.get('/admin/categories/selectcategory/:id', categoriesController.selectCategory)
-router.post('/admin/categories/edit/:id', categoriesController.editCategory)
+router.post('/categories/update', categoriesController.updateCategory)
 router.post('/categories/save', categoriesController.saveCategory)
 router.post('/categories/delete', categoriesController.deleteCategory)
+
+router.get('/admin/articles', articlesController.listAllArticles)
+router.get('/admin/articles/new', articlesController.createArticles)
+router.post('/articles/save', articlesController.saveArticles)
+router.post('/articles/delete', articlesController.deleteArticle)
+
 
 module.exports = router

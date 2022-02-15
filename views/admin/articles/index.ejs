@@ -1,0 +1,52 @@
+<%- include ('../../partials/header.ejs') %>
+    <body>
+        <%- include ('../../partials/navbar.ejs') %>
+        <div class="container">
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Artigos</h2>
+                    <hr>
+                    <a class="btn" style="background-color: #46483d; color: white;" href="/admin/articles/new">Criar novo artigo</a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead> <!--Cabeçalho da  tabela-->
+                            <tr> <!--Linha da tabela-->
+                                <th>ID</th> <!--Coluna da tabela-->
+                                <th>Título</th>
+                                <th>Slug</th>
+                                <th>Categoria</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% articles.forEach(article => { %>
+                                <td> <%= article.id %> </td>
+                                <td> <%= article.title %> </td>
+                                <td> <%= article.slug %> </td>
+                                <td> <%= article.category.title %> </td>
+                                <td>  
+                                    <form action="/articles/delete" method="POST" style="display: inline;" onsubmit="confirmDelete(event, this)">
+                                        <input type="hidden" name="id" value=" <%= article.id %> ">
+                                        <button class="btn btn-danger">Excluir</button>
+                                    </form>
+                                </td>
+                            <% }) %>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </body>
+<%- include ('../../partials/footer.ejs') %>
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        var decision = confirm("Deseja Deletar esse artigo?")
+        if(decision){
+            form.submit()
+        }
+    }
+</script> 

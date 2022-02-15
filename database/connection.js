@@ -7,7 +7,8 @@ const database = 'guiapress_db'
 
 const connection = new Sequelize(database, user, password, {
     host: 'localhost',
-    dialect: 'postgres'
+    dialect: 'postgres',
+    timezone: '-3:00'
 })
 
 module.exports = connection
