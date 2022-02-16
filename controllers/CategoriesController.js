@@ -58,5 +58,18 @@ module.exports = {
         }).then(() => {
             res.redirect('/admin/categories')
         })
+    },
+    slug: function(req, res) {
+        var slug = req.params.slug
+        /* Hey Sequelize, quando você buscar essa categoria, inclua nessa busca
+        todos os artigos que fazem parte dela, eae o sequelize traz isso para nós */
+        Category.findOne({
+            where: {
+                slug: slug
+            },
+            include: [{model: Article}]
+        }).then((category) => {
+
+        })
     }
 }

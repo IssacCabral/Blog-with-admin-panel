@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-// Dados provisórios, Depois escondê-los!!
+// Dados provisórios, depois escondê-los!!
 const user = 'postgres' 
 const password = 'postgres'
 const database = 'guiapress_db'

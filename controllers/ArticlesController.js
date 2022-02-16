@@ -35,8 +35,12 @@ module.exports = {
             include: [{model: Category}]
         }).then((articles) => {
             res.render('./admin/articles/index', {articles: articles})
+            articles.forEach(function(article){
+                console.log(article.category?.title || "outro")
+            })
+
         })
-        
+
     },
     deleteArticle: function(req, res){
         const id = req.body.id
@@ -46,6 +50,18 @@ module.exports = {
             }
         }).then(() => {
             res.redirect('/admin/articles')
+        })
+    },
+    slug: function(req, res){
+        const slug = req.params.slug
+        Article.findOne({
+            where: {
+                slug: slug
+            }
+        }).then((article) => {
+            Category.findAll().then(categories => {
+                res.render('./admin/articles/article', {article: article, categories: categories})
+            })
         })
     }
 }

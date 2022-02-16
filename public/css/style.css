@@ -16,3 +16,14 @@ body{
 a{
     text-decoration: none;
 }
+
+
+.texto{
+    font: bold 20px;
+}
+
+.botao{
+    background: white;
+    color: black;
+    border: none;
+}

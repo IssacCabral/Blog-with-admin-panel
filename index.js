@@ -5,8 +5,6 @@ const bodyParser = require('body-parser')
 const PORT = 3000
 const connection = require('./database/connection')
 const router = require('./routes')
-const Article = require('./models/Article')
-const Category = require('./models/Category')
 
 // view engine
 app.set('view engine', 'ejs')
