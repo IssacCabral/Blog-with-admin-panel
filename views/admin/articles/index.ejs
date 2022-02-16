@@ -28,6 +28,8 @@
                                     <td> <%= article.slug %> </td>
                                     <td> <%= article.category?.title || "Null" %> </td>
                                     <td>  
+                                        <a href="/admin/articles/selectarticle/<%= article.id %>"> <button class="btn btn-warning">Editar</button> </a>
+
                                         <form action="/articles/delete" method="POST" style="display: inline;" onsubmit="confirmDelete(event, this)">
                                             <input type="hidden" name="id" value=" <%= article.id %> ">
                                             <button class="btn btn-danger">Excluir</button>

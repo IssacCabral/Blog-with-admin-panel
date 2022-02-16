@@ -35,10 +35,6 @@ module.exports = {
             include: [{model: Category}]
         }).then((articles) => {
             res.render('./admin/articles/index', {articles: articles})
-            articles.forEach(function(article){
-                console.log(article.category?.title || "outro")
-            })
-
         })
 
     },
@@ -62,6 +58,34 @@ module.exports = {
             Category.findAll().then(categories => {
                 res.render('./admin/articles/article', {article: article, categories: categories})
             })
+        })
+    },
+    selectArticle: function(req, res){
+        var id = req.params.id
+
+        Article.findByPk(id, {
+            include: [{model: Category}]
+        }).then(article => {
+            Category.findAll().then(categories => {
+                res.render('./admin/articles/edit', {article: article, categories: categories})
+            })
+        })
+    },
+    updateArticle: function(req, res){
+        var id = req.body.id
+        var title = req.body.title
+        var body = req.body.body
+        var category = req.body.category
+
+        Article.update({
+            title: title, 
+            slug: slugify(title, {lower: true}),
+            body: body,
+            categoryId: category
+        },{ where: {
+            id: id
+        }}).then(() => {
+            res.redirect('/admin/articles')
         })
     }
 }

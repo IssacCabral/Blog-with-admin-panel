@@ -25,11 +25,13 @@ router.get('/admin/categories/selectcategory/:id', categoriesController.selectCa
 router.post('/categories/update', categoriesController.updateCategory)
 router.post('/categories/save', categoriesController.saveCategory)
 router.post('/categories/delete', categoriesController.deleteCategory)
-router.get('/category/:slug')
+router.get('/category/:slug', categoriesController.slug)
 
 // Articles Routes
 router.get('/admin/articles', articlesController.listAllArticles)
+router.get('/admin/articles/selectarticle/:id', articlesController.selectArticle)
 router.get('/admin/articles/new', articlesController.createArticles)
+router.post('/articles/update', articlesController.updateArticle)
 router.post('/articles/save', articlesController.saveArticles)
 router.post('/articles/delete', articlesController.deleteArticle)
 router.get('/:slug', articlesController.slug)
