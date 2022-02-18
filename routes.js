@@ -4,8 +4,8 @@ const usersController = require('./controllers/UsersController')
 const Article = require('./models/Article')
 const Category = require('./models/Category')
 
-
 const{Router} = require('express')
+const UsersController = require('./controllers/UsersController')
 const router = Router()
 
 // Main Route
@@ -46,5 +46,6 @@ router.get('/articles/page/:num', articlesController.pagination)
 router.get('/admin/users', usersController.listAllUsers)
 router.get('/admin/users/new', usersController.createUsers)
 router.post('/admin/users/save', usersController.saveUsers)
+router.get('/loginusuario', UsersController.loginUsuario)
 
 module.exports = router
