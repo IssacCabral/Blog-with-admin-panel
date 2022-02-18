@@ -33,7 +33,7 @@ Is a blog where, depending on the type of user, you can view or manipulate artic
 <h2>Admin pages:</h2>
 <img src="./preview/4.png">
 <img src="./preview/5.png">
-<h2>Creating and article:</h2>
+<h2>Creating an article:</h2>
 <img src="./preview/6.png">
 <h2>Now let's visualize it</h2>
 <img src="./preview/7.png">
