@@ -8,9 +8,12 @@ const router = Router()
 
 // Main Route
 router.get('/', (req, res) => {
-    Article.findAll({order: [
-        ['id', 'DESC']
-    ]}).then((articles) => {
+    Article.findAll({
+        order: [
+            ['id', 'DESC']
+        ],
+        limit: 4
+    }).then((articles) => {
         Category.findAll().then((categories) => {
             res.render('index', {articles: articles, categories: categories})
         })
@@ -35,5 +38,7 @@ router.post('/articles/update', articlesController.updateArticle)
 router.post('/articles/save', articlesController.saveArticles)
 router.post('/articles/delete', articlesController.deleteArticle)
 router.get('/:slug', articlesController.slug)
+router.get('/articles/page/:num', articlesController.pagination)
+
 
 module.exports = router

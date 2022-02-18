@@ -58,6 +58,7 @@ module.exports = {
             Category.findAll().then(categories => {
                 res.render('./admin/articles/article', {article: article, categories: categories})
             })
+            //res.send(article?.title || 'deu ruim')
         })
     },
     selectArticle: function(req, res){
@@ -86,6 +87,45 @@ module.exports = {
             id: id
         }}).then(() => {
             res.redirect('/admin/articles')
+        })
+    },
+    pagination: function(req, res){
+        var pageNum = req.params.num
+        var offset = 0
+
+        if(isNaN(pageNum) || pageNum == 1){
+            offset = 0
+        }else{
+            offset = parseInt(pageNum) * 4
+        }
+
+        Article.findAndCountAll({
+            limit: 4,
+            offset: offset,
+            order: [
+                ['id', 'DESC']
+            ]
+        }).then((articles) => {
+            var next
+            
+            if(offset + 4 >= articles.count){
+                next = false
+            }else{
+                next = true
+            }
+            
+            var result = {
+                pageNum: parseInt(pageNum),
+                articles: articles,
+                next: next
+            }
+            // result.articles.rows.forEach(function(element){
+            //     console.log(element.id + " " + element.title) 
+            // }) 
+            // console.log(result.next)
+            Category.findAll().then((categories) => {
+                res.render('./admin/articles/page', {result: result, categories: categories})
+            })
         })
     }
 }
