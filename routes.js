@@ -1,7 +1,9 @@
 const articlesController = require('./controllers/ArticlesController')
 const categoriesController = require('./controllers/CategoriesController')
+const usersController = require('./controllers/UsersController')
 const Article = require('./models/Article')
 const Category = require('./models/Category')
+
 
 const{Router} = require('express')
 const router = Router()
@@ -40,5 +42,9 @@ router.post('/articles/delete', articlesController.deleteArticle)
 router.get('/:slug', articlesController.slug)
 router.get('/articles/page/:num', articlesController.pagination)
 
+// User Routes
+router.get('/admin/users', usersController.listAllUsers)
+router.get('/admin/users/new', usersController.createUsers)
+router.post('/admin/users/save', usersController.saveUsers)
 
 module.exports = router

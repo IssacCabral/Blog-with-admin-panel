@@ -96,7 +96,7 @@ module.exports = {
         if(isNaN(pageNum) || pageNum == 1){
             offset = 0
         }else{
-            offset = parseInt(pageNum) * 4
+            offset = (parseInt(pageNum) - 1) * 4
         }
 
         Article.findAndCountAll({
@@ -119,10 +119,6 @@ module.exports = {
                 articles: articles,
                 next: next
             }
-            // result.articles.rows.forEach(function(element){
-            //     console.log(element.id + " " + element.title) 
-            // }) 
-            // console.log(result.next)
             Category.findAll().then((categories) => {
                 res.render('./admin/articles/page', {result: result, categories: categories})
             })
